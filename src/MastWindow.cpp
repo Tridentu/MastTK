@@ -1,6 +1,6 @@
 
 #include <curses.h>
-#include "mast_tk.h"
+#include "MastWindow.h"
 
 Mast::TK::Window::Window(int height, int width, int startx, int starty){
   border = (Mast::TK::WindowBorder){
@@ -30,6 +30,10 @@ Mast::TK::Window::~Window(){
 
 void Mast::TK::Window::set_border(Mast::TK::WindowBorder border2){
   border = border2;
+}
+
+void Mast::TK::Window::set_menu(MENU*& menu) {
+  set_menu_win(menu, this->window_pvt);
 }
 
 

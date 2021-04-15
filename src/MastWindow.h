@@ -28,6 +28,7 @@ namespace Mast {
       Window(int height, int width, int startx, int starty);
       ~Window();
       void set_border(WindowBorder border2);
+      void set_menu(MENU*& menu);
     private:
       WINDOW* window_pvt;
       
