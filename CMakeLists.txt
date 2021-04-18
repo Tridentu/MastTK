@@ -13,7 +13,7 @@ file(GLOB MTK_HDRS src/*.h src/*.hpp)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lcurses -lmenu")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lcurses -lmenu -lform")
 add_library(mast_tk SHARED ${MTK_SRCS})
 
 target_link_libraries(
