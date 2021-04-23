@@ -21,6 +21,7 @@ namespace Mast {
    typedef sigc::signal<void(int)> ItemSelectedEvent;
    typedef std::map<int,bool> BoolChoiceMap;
    typedef std::map<int, int> ColorMap;
+   typedef std::vector<std::any> PointerVector;
    typedef int ColorPair;
    class Menu {
    public:
@@ -44,12 +45,18 @@ namespace Mast {
        ColorPair getColorPair() const;
        void processInput(int c);
        ItemSelectedEvent onSelect;
+       void addPointer(int index, std::any pointer);
        void displayExitMsg();
+       void clearScreen();
+       MENU* getMenu() const {
+         return menu_pvt; 
+       };
    protected:
        MENU* menu_pvt;
        ITEM** menu_items;
        StringEntryVector options_vec;
        StringEntryVector values_vec;
+       PointerVector pointers;
        char** options;
        char** values;
        Window* win;

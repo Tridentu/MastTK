@@ -59,6 +59,10 @@ void Mast::TK::Window::refresh() {
     wrefresh(this->window_pvt);
 }
 
+void Mast::TK::Window::clearScreen(){
+  wclear(this->window_pvt);
+}
+
 void Mast::TK::Window::draw(bool use_border) {
   int x, y, w, h;
   x = border.startx;
@@ -79,3 +83,14 @@ void Mast::TK::Window::draw(bool use_border) {
   
 }
 
+void Mast::TK::Window::toggleCursor(bool on){
+  cursor_active = on;
+}
+
+void Mast::TK::Window::processCursorInput(int c){
+  if(cursor_active){
+    curs_set(1);
+  } else {
+    curs_set(0);
+  }
+}

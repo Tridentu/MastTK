@@ -77,22 +77,27 @@ void Mast::TK::Menu::processInput(int c) {
 }
 
 
+void Mast::TK::Menu::addPointer(int index, std::any pointer){
+  pointers[index] = pointer;
+}
 
 void Mast::TK::Menu::generateMenu(bool show_desc){
     int n_choices = this->options_vec.size();
+    options = (char**)calloc(n_choices, 258*sizeof(char));
+    values = (char**)calloc(n_choices, 258*sizeof(char));
     for(int i = 0; i < n_choices; ++i){
-        options[i] = (char*)malloc(options_vec[i].size()*sizeof(char));
-        values[i] = (char*)malloc(values_vec[i].size()*sizeof(char));
+      options[i] = (char*)malloc(1+(options_vec[i].size()*sizeof(char)));
+      values[i] = (char*)malloc(1+(values_vec[i].size()*sizeof(char)));
         strcpy(options[i], options_vec[i].c_str());
         strcpy(values[i], values_vec[i].c_str());
     }
-	menu_items = (ITEM **)calloc(n_choices + 1, sizeof(ITEM *));
-	for(int i = 0; i < n_choices; ++i){
+   menu_items = (ITEM **)calloc(n_choices + 1, sizeof(ITEM *));
+   for(int i = 0; i < n_choices; ++i){
         menu_items[i] = new_item(options[i], values[i]);
-    }
-	menu_items[n_choices] = (ITEM *)NULL;
+   }
+    menu_items[n_choices] = (ITEM *)NULL;
     menu_pvt = new_menu((ITEM **)menu_items);
-    
+    set_menu_format(menu_pvt, 40, 1);
 }
 
 void Mast::TK::Menu::draw(){
@@ -113,4 +118,21 @@ void Mast::TK::Menu::displayExitMsg(){
     exit_str += std::to_string(exitFKey);
     exit_str +=  " to Exit";
     mvprintw(LINES - 2, 1, exit_str.c_str());
+}
+
+
+Mast::TK::Menu::~Menu(){
+  for(int i = 1; i < options_vec.size() + 1; ++i)
+    free_item(menu_items[i]);
+  free_menu(menu_pvt);
+  
+  
+  
+}
+
+void Mast::TK::Menu::clearScreen(){
+  if(this->win){
+    this->win->clearScreen();
+    wclear(this->sub_win);
+  }
 }

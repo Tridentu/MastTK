@@ -39,9 +39,13 @@ namespace Mast {
       int get_input();
       WINDOW* getWindow() const;
       void refresh();
+      void clearScreen();
+      void toggleCursor(bool on);
+      void processCursorInput(int c);
     private:
       WINDOW* window_pvt;
-      
+    protected:
+      bool cursor_active;
     };
 
  
