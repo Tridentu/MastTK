@@ -56,4 +56,15 @@ namespace MastTDE {
     virtual void DrawMenuTitle() = 0;
     virtual void AddMenu(std::string name, std::function<void()> processor) = 0;
   };
+
+
+  class ChoiceRoutine {
+  public:
+    virtual ~ChoiceRoutine(){};
+    virtual void Run() = 0;
+    virtual void Cleanup() = 0;
+  };
+
+  
+  
 };
