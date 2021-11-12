@@ -30,7 +30,7 @@ add_definitions(${GTK2_CFLAGS_OTHER})
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_library(mast_tk SHARED ${MTK_SRCS})
-
+set( CMAKE_POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(
     mast_tk
     PUBLIC
@@ -39,6 +39,8 @@ target_link_libraries(
 	${GTK2_LIBRARIES}
 	notify
 	gobject-2.0
+    PRIVATE
+	TermOx
 )
 
 install(TARGETS mast_tk DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
