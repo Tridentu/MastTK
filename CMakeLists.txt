@@ -1,5 +1,5 @@
  
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 
 project(mast_tk)
 
@@ -15,6 +15,7 @@ SET(CURSES_USE_NCURSES TRUE)
 include_directories(${CURSES_INCLUDE_DIR})
 include_directories(${LIBNOTIFY_INCLUDE_DIRS})
 include_directories(${GTK2_INCLUDE_DIRS})
+include_directories(${CMAKE_INSTALL_PREFIX}/include/termox)
 
 include_directories("./src")
 file(GLOB MTK_SRCS src/*.cpp)
@@ -26,7 +27,7 @@ link_directories(${GTK2_LIBRARY_DIRS})
 
 add_definitions(${GTK2_CFLAGS_OTHER})
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_library(mast_tk SHARED ${MTK_SRCS})
 
