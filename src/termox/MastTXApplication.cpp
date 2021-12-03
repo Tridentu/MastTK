@@ -8,23 +8,24 @@
 
 
 namespace MastTDE {
-   MastTXApplication::MastTXApplication(const std::string& name, std::string desc){
+   MastTXApplication::MastTXApplication(const std::string& name){
     m_Name = name;
-    m_Desc = desc;
-    m_AppCmd = m_AppCmd->name(name)->description(desc);
-
+    m_AppCmd.name(name);
+    Init();
  }
 
-  void MastTXApplication::Run(int argc, char** argv){
-    m_AppCmd->parse(argc, argv);
+  int MastTXApplication::Run(int argc, const char** argv){
+    return RunWidget();
   }
 
    void MastTXApplication::AddSubCommand(std::string name, std::string desc){
-    m_Subcommands[name] = m_AppCmd->add_subcommand(name, desc);
+    m_Subcommands[name] = m_AppCmd.add_subcommand(name, desc);
   }
 
  CLI::App* MastTXApplication::GetSubCommand(std::string name) {
    return  m_Subcommands[name];
   }
+
+  
 
 }

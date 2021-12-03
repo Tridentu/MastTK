@@ -16,7 +16,7 @@ namespace MastTDE {
 
   public:
     virtual ~MastApplication(){};
-    virtual void Run(int arcg, char** argv) = 0;
+    virtual int  Run(int arcg, const char** argv) = 0;
     virtual const  MastBackend GetBackend() = 0;
     virtual void Init() = 0;
     virtual void AddSubCommand(std::string name, std::string desc) = 0;

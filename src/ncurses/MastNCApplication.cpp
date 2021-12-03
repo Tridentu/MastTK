@@ -3,16 +3,16 @@
 
 
 namespace MastTDE {
-  MastNCApplication::MastNCApplication(const std::string& name, std::string desc){
+  MastNCApplication::MastNCApplication(const std::string& name){
     m_Name = name;
-    m_Desc = desc;
     m_AppCmd.name(name);
-    m_AppCmd.description(desc);
+    m_AppCmd.require_subcommand(0);
   }
   
 
-  void MastNCApplication::Run(int argc, char** argv){
+  int MastNCApplication::Run(int argc, const char** argv){
     m_AppCmd.parse(argc, argv);
+    return 0;
   }
 
 

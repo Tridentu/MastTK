@@ -1,7 +1,7 @@
 #pragma once
 #include "MenuUtils.h"
 #include <CLI11.hpp>
-#include "MastApplication.h"
+#include "../core/MastApplication.h"
 #include <string>
 #include <map>
 
@@ -9,9 +9,9 @@ namespace MastTDE {
 
     class MastNCApplication : public MastApplication {
   public:
-    MastNCApplication(const std::string& name, std::string desc);
+    MastNCApplication(const std::string& name);
     ~MastNCApplication(){  }
-    virtual void Run(int argc, char** argv) override;
+    virtual int Run(int argc, const char** argv) override;
     virtual const MastBackend GetBackend() override { return MastBackend::NCurses; }
     virtual void Init() override {};
     virtual void AddSubCommand(std::string name, std::string desc) override;
