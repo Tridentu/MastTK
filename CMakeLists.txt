@@ -16,22 +16,16 @@ SET(CURSES_USE_NCURSES TRUE)
 include_directories(${CURSES_INCLUDE_DIR})
 include_directories(${LIBNOTIFY_INCLUDE_DIRS})
 include_directories(${GTK2_INCLUDE_DIRS})
-include_directories(${CMAKE_INSTALL_PREFIX}/include/termox)
 include_directories(/usr/include/esc )
 include_directories("./src/core")
-include_directories("/src/termox")
 include_directories("/src/ncurses")
 include_directories("/src/wmtk")
 
 file(GLOB MTK_SRCS src/core/*.cpp)
 
-file(GLOB MTK_TX_SRCS src/termox/*.cpp)
-
 file(GLOB MTK_NC_SRCS src/ncurses/*.cpp)
 
 file(GLOB MTK_CORE_HDRS src/core/*.h src/core/*.hpp)
-
-file(GLOB MTK_TX_HDRS src/termox/*.h src/termox/*.hpp)
 
 file(GLOB MTK_NC_HDRS src/ncurses/*.h src/ncurses/*.hpp)
 
@@ -46,10 +40,6 @@ add_library(mast_tk_core SHARED
    ${MTK_SRCS}
 )
 
-add_library(mast_tk_tx SHARED
-    ${MTK_TX_SRCS}
-)
-
 add_library(mast_tk_nc SHARED
    ${MTK_NC_SRCS}
 )
@@ -62,14 +52,6 @@ target_link_libraries(
 	gobject-2.0
 )
 
-target_link_libraries(
-  mast_tk_tx
-  PUBLIC
-	mast_tk_core
-  PRIVATE
-	TermOx
-	escape
-)
 
 target_link_libraries(
    mast_tk_nc
@@ -81,8 +63,6 @@ target_link_libraries(
 
 
 install(TARGETS mast_tk_core DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install(TARGETS mast_tk_tx DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 install(TARGETS mast_tk_nc DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 install(FILES ${MTK_CORE_HDRS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/mast_tk/core)
-install(FILES ${MTK_TX_HDRS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/mast_tk/termox)
 install(FILES ${MTK_NC_HDRS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/mast_tk/ncurses)
